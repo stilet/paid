@@ -16,24 +16,24 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 
     && pip3 install --no-cache-dir \
         circus==0.13.0 \
-        gunicorn==19.5.0 \
+        gunicorn==19.7.1 \
         iowait==0.2 \
-        psutil==4.2.0 \
-        pyzmq==15.2.0 \
-        tornado==4.3 \
+        psutil==5.4.0 \
+        pyzmq==16.0.3 \
+        tornado==4.5.2 \
 
     && apt-get autoremove -y ${BUILD_DEPS} \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-COPY requirements.txt /opt/demo/app/
-RUN pip3 install --no-cache-dir -r /opt/demo/app/requirements.txt
+COPY requirements.txt /opt/sun/app/
+RUN pip3 install --no-cache-dir -r /opt/sun/app/requirements.txt
 
 COPY etc/ /etc/
-COPY demo/ /opt/demo/app/
+COPY sun/ /opt/sun/app/
 
-WORKDIR /opt/demo/app
-ENV STATIC_ROOT=/opt/demo/static
+WORKDIR /opt/sun/app
+ENV STATIC_ROOT=/opt/sun/static
 RUN nginx -t \
     && python3 -c 'import compileall, os; compileall.compile_dir(os.curdir, force=1)' > /dev/null \
-    && ./manage.py collectstatic --settings=demo.settings --no-input -v0
+    && ./manage.py collectstatic --settings=sun.settings --no-input -v0
 CMD ["circusd", "/etc/circus/web.ini"]

@@ -5,16 +5,16 @@ services:
     build: .
     container_name: web
     environment:
-      DJANGO_SETTINGS_MODULE: demo.settings_prod
-      DATABASE_URL: postgres://postgres:secret@db/demo
+      DJANGO_SETTINGS_MODULE: sun.settings_prod
+      DATABASE_URL: postgres://postgres:Htdjk.wbz@db/sun
       ALLOWED_HOSTS: "*"
     ports:
       - "80:80"
 
   db:
-    image: postgres:9.5
+    image: postgres:9.6
     environment:
-      POSTGRES_PASSWORD: "secret"
-      POSTGRES_DB: "demo"
+      POSTGRES_PASSWORD: "Htdjk.wbz"
+      POSTGRES_DB: "sun"
     volumes:
       - /var/lib/postgresql/data

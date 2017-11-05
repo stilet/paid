@@ -7,7 +7,7 @@ First you should provision a Docker host (e.g. with [Docker Machine](https://doc
 ## Get an image
 Clone this repo
 ```bash
-git clone git@github.com:satyrius/paid.git && paid
+git clone git@github.com:stilet/paid.git && paid
 ```
 Build an image
 ```bash
@@ -20,11 +20,11 @@ docker-compose up -d
 ```
 Run Django migrations
 ```
-docker exec web /opt/demo/app/manage.py migrate --no-input
+docker exec web /opt/sun/app/manage.py migrate --no-input
 ```
 You can create a user
 ```bash
-docker exec -it web /opt/demo/app/manage.py createsuperuser
+docker exec -it web /opt/sun/app/manage.py createsuperuser
 ```
 And check how it works in browser
 ```
